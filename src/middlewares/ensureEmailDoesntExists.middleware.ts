@@ -10,9 +10,7 @@ export const ensureEmailDoesntExists = async (req:Request, res:Response, next: N
         email: emailReq
     })
 
-    console.log(req.body.email, emailReq, userMail)
-
-    if(userMail){
+    if(userMail != null){
         throw new AppError("Email already exists", 401)
     }
 
