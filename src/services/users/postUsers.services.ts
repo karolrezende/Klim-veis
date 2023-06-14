@@ -1,7 +1,7 @@
 import { hash } from "bcryptjs"
 import { usersRepository } from "../../data-source"
 import { TuserRequest, TuserResponse } from "../../interfaces/users.interfaces"
-import { UserSchemaResponse } from "../../schemas/user.schemas"
+import { userSchemaResponse } from "../../schemas/user.schemas"
 
 export const userPostService = async (userPostRequest: TuserRequest): Promise<TuserResponse> => {
     
@@ -9,6 +9,6 @@ export const userPostService = async (userPostRequest: TuserRequest): Promise<Tu
     const createdUser = usersRepository.create(userPostRequest)
     await usersRepository.save(createdUser)
 
-    const zoddedPost: TuserResponse = UserSchemaResponse.parse(createdUser)
+    const zoddedPost: TuserResponse = userSchemaResponse.parse(createdUser)
     return zoddedPost
 }

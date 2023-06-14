@@ -17,4 +17,8 @@ export const userSchemaRequest = userSchema.omit({
   deletedAt: true,
 });
 
-export const UserSchemaResponse = userSchema.omit({ password: true });
+export const userSchemaResponse = userSchema.omit({ password: true });
+
+export const userSchemaResponseArr = z.array(userSchemaResponse)
+
+export const userSchemaRequestPatch = userSchemaRequest.omit({admin: true}).partial()
