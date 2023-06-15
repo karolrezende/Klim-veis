@@ -12,7 +12,7 @@ export const ensureToken = (req:Request, res:Response, next: NextFunction) => {
 
     jwt.verify(token, process.env.SECRET_KEY!, (err: any, decoded: any)=>{
         if(err) throw new AppError(err.message)
-
+        console.log(decoded.isAdmin)
         res.locals.isAdmin = decoded.isAdmin
         res.locals.email = decoded.sub
 

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { userGetController, userPatchController, userPostController } from "../controllers/users.controllers";
+import { userDeleteController, userGetController, userPatchController, userPostController } from "../controllers/users.controllers";
 import { ensureSchemaRequest } from "../middlewares/ensureSchemaRequest.middleware";
 import { userSchemaRequest, userSchemaRequestPatch } from "../schemas/user.schemas";
 import { userLoginController } from "../controllers/login.controllers";
@@ -9,6 +9,9 @@ import { ensureToken } from "../middlewares/ensureToken.middleware";
 import { ensureOwner } from "../middlewares/ensureOwner.middlewares";
 import { ensureIdExists } from "../middlewares/ensureIdExists.middlewares";
 import { ensureBodyExists } from "../middlewares/ensureBodyExists.middlewares";
+import { ensureIsAdm } from "../middlewares/ensureIsAdm.middlewares";
+import { categorieRequestSchema } from "../schemas/categories.schemas";
+import { categoriesGetController, categoriesPostController } from "../controllers/categories.controllers";
 
 export const userRoute: Router = Router()
 export const loginRoute: Router = Router()
@@ -21,3 +24,8 @@ loginRoute.post('', ensureSchemaRequest(loginSchemaRequest), userLoginController
 userRoute.post('', ensureSchemaRequest(userSchemaRequest), ensureEmailDoesntExists, userPostController)
 userRoute.get('', ensureToken,userGetController)
 userRoute.patch('/:id', ensureToken, ensureSchemaRequest(userSchemaRequestPatch), ensureIdExists, ensureBodyExists,ensureEmailDoesntExists, ensureOwner, userPatchController)
+userRoute.delete('/:id', ensureToken, ensureIsAdm, ensureIdExists, userDeleteController)
+
+
+categoriesRoute.post('', ensureToken, ensureIsAdm, ensureSchemaRequest(categorieRequestSchema), categoriesPostController)
+categoriesRoute.get('', categoriesGetController)

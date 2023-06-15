@@ -13,6 +13,6 @@ export const ensureIdExists = async (req:Request, res:Response, next: NextFuncti
     if(!user){
         throw new AppError("User not found", 404)
     }
-
+    res.locals.userExists = id
     next()
 }

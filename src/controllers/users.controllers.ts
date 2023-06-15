@@ -3,6 +3,7 @@ import { TuserRequest, TuserRequestPatch, TuserResponse } from "../interfaces/us
 import { userPostService } from "../services/users/postUsers.services";
 import { getUserService } from "../services/users/getUsers.services";
 import { userPatchService } from "../services/users/patchUser.services";
+import { deleteUserService } from "../services/users/deleteUsers.services";
 
 export const userPostController = async (req: Request, res: Response): Promise<Response> => {
     
@@ -25,4 +26,10 @@ export const userPatchController = async (req:Request, res:Response): Promise<Re
     const userPatch: TuserResponse = await userPatchService(userId,user, isAdm, owner)
 
     return res.status(200).json(userPatch)
+} 
+export const userDeleteController = async (req:Request, res: Response): Promise<Response>=>{
+
+    await deleteUserService(res.locals.userExists)
+
+    return res.sendStatus(204)
 }
