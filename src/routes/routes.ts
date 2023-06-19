@@ -13,7 +13,7 @@ import { ensureIsAdm } from "../middlewares/ensureIsAdm.middlewares";
 import { categorieRequestSchema } from "../schemas/categories.schemas";
 import { categoriesGetController, categoriesPostController } from "../controllers/categories.controllers";
 import { realEstateSchemaRequest } from "../schemas/realEstate.schemas";
-import { postRealEstateController } from "../controllers/realEstate.controllers";
+import { getRealEstateByCategoryController, postRealEstateController } from "../controllers/realEstate.controllers";
 
 export const userRoute: Router = Router()
 export const loginRoute: Router = Router()
@@ -31,6 +31,9 @@ userRoute.delete('/:id', ensureToken, ensureIsAdm, ensureIdExists, userDeleteCon
 
 categoriesRoute.post('', ensureToken, ensureIsAdm, ensureSchemaRequest(categorieRequestSchema), categoriesPostController)
 categoriesRoute.get('', categoriesGetController)
+categoriesRoute.get('/:id/realEstate', getRealEstateByCategoryController)
 
 realEstateRoute.post('', ensureToken, ensureIsAdm, ensureSchemaRequest(realEstateSchemaRequest), postRealEstateController)
-realEstateRoute.get('/:id/realEstate', )
+
+
+
