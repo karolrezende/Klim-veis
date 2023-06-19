@@ -1,11 +1,11 @@
 import { z } from "zod";
-import { address } from "./address.schemas";
+import { addressSchema } from "./address.schemas";
 
 export const realEstateSchema = z.object({
   id: z.number(),
   value: z.string(),
   size: z.number(),
-  address: address,
+  address: addressSchema,
   categoryId: z.number(),
   sold: z.boolean(),
   createdAt: z.date(),
