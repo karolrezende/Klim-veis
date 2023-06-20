@@ -13,7 +13,8 @@ import { ensureIsAdm } from "../middlewares/ensureIsAdm.middlewares";
 import { categorieRequestSchema } from "../schemas/categories.schemas";
 import { categoriesGetController, categoriesPostController } from "../controllers/categories.controllers";
 import { realEstateSchemaRequest } from "../schemas/realEstate.schemas";
-import { getRealEstateByCategoryController, postRealEstateController } from "../controllers/realEstate.controllers";
+import { getRealEstateByCategoryController, getRealEstateController, postRealEstateController } from "../controllers/realEstate.controllers";
+import { getRealEstateService } from "../services/realEstate/getRealEstate.services";
 
 export const userRoute: Router = Router()
 export const loginRoute: Router = Router()
@@ -34,6 +35,6 @@ categoriesRoute.get('', categoriesGetController)
 categoriesRoute.get('/:id/realEstate', getRealEstateByCategoryController)
 
 realEstateRoute.post('', ensureToken, ensureIsAdm, ensureSchemaRequest(realEstateSchemaRequest), postRealEstateController)
+realEstateRoute.get('', getRealEstateController)
 
-
-
+schedulesRoute.post('', )
